@@ -11,5 +11,6 @@ public static void main(String[] args){
     que.add(40);
     System.out.println(que.peek());
     System.out.println(que);
+    System.out.println(que.size());
 }
 }
