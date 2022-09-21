@@ -1,0 +1,38 @@
+import java.util.*;
+  
+  public class Main{
+  
+  public static void main(String[] args) {
+      Scanner scn = new Scanner(System.in);
+      int n = scn.nextInt();
+      int sourceBase = scn.nextInt();
+     int  destBase= scn.nextInt();
+     int ans=anybase(n,sourceBase,destBase);
+     System.out.println(ans);
+   }   
+   public static int anybase(int n, int sourceBase, int destBase){
+       int source=btod(n,sourceBase);
+       int dest=dtoab(source,destBase);
+       return dest;
+   }
+   public static int btod(int n, int sourceBase){
+       int rv=0,p=1;
+       while(n>0){
+           int d=n%10;
+           n=n/10;
+           rv+=d*p;
+           p=p*sourceBase;
+       }
+       return rv;
+   }
+   public static int dtoab(int source, int destBase){
+       int rv=0,p=1;
+       while(source>0){
+           int d=source%destBase;
+           source=source/destBase;
+           rv+=d*p;
+           p=p*10;
+       }
+       return rv;
+   }
+  }
