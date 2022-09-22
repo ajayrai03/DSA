@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int m=scn.nextInt();
+        int[][] a =new int[n][m];
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<a[0].length;j++){
+                a[i][j]=scn.nextInt();
+            }
+        }
+        int rmin=0,cmin=0,rmax=n-1,cmax=m-1,count=0;
+        while(count<n*m){
+            for(int row=rmin;row<=rmax&&count<n*m;row++){
+                System.out.println(a[row][cmin]);
+                count++;
+            }
+            cmin++;
+            for(int col=cmin;col<=cmax&&count<n*m;col++){
+                System.out.println(a[rmax][col]);
+                count++;
+            }
+            rmax--;
+            for(int row=rmax;row>=rmin&&count<n*m;row--){
+                System.out.println(a[row][cmax]);
+                count++;
+            }
+            cmax--;
+            for(int col=cmax;col>=cmin&&count<n*m;col--){
+                System.out.println(a[rmin][col]);
+                count++;
+            }
+            rmin++;
+        }
+    }
+
+}
