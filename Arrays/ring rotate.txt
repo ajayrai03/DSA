@@ -1,0 +1,116 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    
+    public static void ring_r(int[][] a, int s, int r){
+        int[] la=fill1dwith2d(a,s);
+        rotate(la,r);
+        fill2dwith1d(a,s,la);
+        
+    }
+    public static int[] fill1dwith2d(int[][] a, int s){
+        int n=a.length;
+        int m=a[0].length;
+        int rmin=s-1;
+        int cmin=s-1;
+        int rmax=n-s;
+        int cmax=m-s;
+        int idx=0;
+        int sz=2*(rmax-rmin)+2*(cmax-cmin);
+        int[] la=new int[sz];
+        for(int row=rmin;row<=rmax;row++){
+            la[idx]=a[row][cmin];
+            idx++;
+        }
+        cmin++;
+        for(int col=cmin;col<=cmax;col++){
+            la[idx]=a[rmax][col];
+            idx++;
+        }
+        rmax--;
+        for(int row=rmax;row>=rmin;row--){
+            la[idx]=a[row][cmax];
+            idx++;
+        }
+        cmax--;
+        for(int col=cmax;col>=cmin;col--){
+            la[idx]=a[rmin][col];
+            idx++;
+        }
+        return la;
+    }
+    public static void rotate(int[] la, int r){
+        r=r%la.length;
+        if(r<0){
+            r=r+la.length;
+        }
+        reverse(la,0,la.length-r-1);
+        reverse(la,la.length-r,la.length-1);
+        reverse(la,0,la.length-1);
+    }
+    public static void reverse(int[] la, int left, int right){
+        while(left<right){
+            int t=la[left];
+            la[left]=la[right];
+            la[right]=t;
+            left++;
+            right--;
+        }
+    }
+    public static void fill2dwith1d(int[][] a, int s, int[] la){
+        int n=a.length;
+        int m=a[0].length;
+        int rmin=s-1;
+        int cmin=s-1;
+        int rmax=n-s;
+        int cmax=m-s;
+        int idx=0;
+        for(int row=rmin;row<=rmax;row++){
+            a[row][cmin]=la[idx];
+            idx++;
+        }
+        cmin++;
+        for(int col=cmin;col<=cmax;col++){
+            a[rmax][col]=la[idx];
+            idx++;
+        }
+        rmax--;
+        for(int row=rmax;row>=rmin;row--){
+            a[row][cmax]=la[idx];
+            idx++;
+        }
+        cmax--;
+        for(int col=cmax;col>=cmin;col--){
+            a[rmin][col]=la[idx];
+            idx++;
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn=new Scanner(System.in);
+        int n=scn.nextInt();
+        int m=scn.nextInt();
+        int[][] a=new int[n][m];
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<a[0].length;j++){
+                a[i][j]=scn.nextInt();
+            }
+        }
+        int s=scn.nextInt();
+        int r=scn.nextInt();
+        ring_r(a,s,r);
+        display(a);
+    }
+
+    public static void display(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[0].length; j++){
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
