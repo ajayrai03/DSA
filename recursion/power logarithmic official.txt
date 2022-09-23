@@ -1,0 +1,28 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        // write your code here
+        Scanner scn=new Scanner(System.in);
+        int x=scn.nextInt();
+        int n=scn.nextInt();
+        int p=power(x,n);
+        System.out.println(p);
+        
+    }
+
+    public static int power(int q, int n){
+       if(n==0){
+           return 1;
+       }
+       int p=power(q,n/2);
+       int x=p*p;
+       if(n%2==1){
+           x=x*q;
+       }
+       return x;
+    }
+
+}
