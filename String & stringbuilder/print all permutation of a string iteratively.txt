@@ -45,3 +45,4 @@ cab
 acb
 bca
 cba
+2 ka power 3=6
