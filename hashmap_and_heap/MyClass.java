@@ -1,3 +1,4 @@
+package hashmap_and_heap;
 import java.util.*;
 public class MyClass {
     public static void main(String args[]) {
