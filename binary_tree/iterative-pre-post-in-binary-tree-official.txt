@@ -86,7 +86,6 @@ public class Main {
     String in="";
     String post="";
     while(st.size()>0){
-        // tos=top of stack
         Pair tos=st.peek();
         if(tos.state==0){
             pre+=tos.node.data+" ";
@@ -94,7 +93,6 @@ public class Main {
             if(tos.node.left!=null){
                 st.push(new Pair(tos.node.left,0));
             }
-            
         }
         else if(tos.state==1){
             in+=tos.node.data+" ";
