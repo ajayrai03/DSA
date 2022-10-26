@@ -1,5 +1,5 @@
 // import java.io.*;
-package Stacks_and_Queues;
+
 import java.util.*;
 
 public class sliding_window{
