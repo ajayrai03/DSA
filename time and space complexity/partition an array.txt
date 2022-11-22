@@ -5,7 +5,7 @@ public class Main {
 
   public static void partition(int[] arr, int pivot){
     //write your code here
-    // o to j-1 <=p, j to i-1 >p, and 1 to e : unknown
+    // o to j-1 <=p, j to i-1 >p, and 1 to end : unknown
     int i=0;
     int j=0;
     while(i<arr.length){
