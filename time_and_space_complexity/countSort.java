@@ -3,15 +3,19 @@ import java.util.*;
 public class countSort {
     public static void count_Sort(int[] arr,int min,int max){
 
+        // frequency count
         int size=max-min+1;
         int[] farr=new int[size];
         for(int i=0;i<arr.length;i++){
             int idx=arr[i]-min;
             farr[idx]++;
         }
+        // prefix sum
+
         for(int i=1;i<size;i++){
             farr[i]=farr[i]+farr[i-1];
         }
+        // new array created
         int[] ans=new int[arr.length];
         for(int i=arr.length-1;i>=0;i--){
             int idx=arr[i]-min;
@@ -19,6 +23,8 @@ public class countSort {
             ans[pos-1]=arr[i];
             farr[idx]--;
         }
+
+        // copy into original array
         for(int i=0;i<arr.length;i++){
             arr[i]=ans[i];
         }
