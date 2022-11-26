@@ -13,6 +13,7 @@ public class radix{
         int exp=1;
         while(exp<=max){
             countSort(arr,exp);
+            // exp pehle 1,10,100,1000
             exp=exp*10;
         }
     }
