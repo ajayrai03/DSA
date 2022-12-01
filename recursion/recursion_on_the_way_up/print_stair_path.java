@@ -4,8 +4,8 @@ public class print_stair_path {
     public static void main(String[] args){
     Scanner scn=new Scanner(System.in);
     int n=scn.nextInt();
-    scn.close();
-    printStairPaths(n,"");        
+    printStairPaths(n,"");  
+    scn.close();    
     }
     public static void printStairPaths(int n, String path){
         if(n<0){
