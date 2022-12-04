@@ -330,40 +330,76 @@ public class Main {
     }
 
     public void kReverse(int k) {
-      // write your code here
-      LinkedList pre=null;
-      while(this.size()>0){
-          LinkedList curr=new LinkedList();
-          if(this.size>=k){
-          for(int i=0;i<k;i++){
-              int val=this.getFirst();
-              this.removeFirst();
-              curr.addFirst(val);
-          }
-          }
-          else{
+      LinkedList prev = null;
 
-            // os-> original size
-        
-              int os=this.size();
-              for(int i=0;i<os;i++){
-              int val=this.getFirst();
-              this.removeFirst();
-              curr.addLast(val);
+      while (this.size > 0) {
+        LinkedList curr = new LinkedList();
+
+        if (this.size >= k) {
+          for (int i = 0; i < k; i++) {
+            int val = this.getFirst();
+            this.removeFirst();
+            curr.addFirst(val);
           }
+        } else {
+          int sz = this.size;
+          for (int i = 0; i < sz; i++) {
+            int val = this.getFirst();
+            this.removeFirst();
+            curr.addLast(val);
           }
-          if(pre==null){
-              pre=curr;
-          }
-          else{
-              pre.tail.next=curr.head;
-              pre.tail=curr.tail;
-              pre.size=curr.size;
-          }
+        }
+
+        if (prev == null) {
+          prev = curr;
+        } else {
+          prev.tail.next = curr.head;
+          prev.tail = curr.tail;
+          prev.size += curr.size;
+        }
       }
-      this.head=pre.head;
-      this.tail=pre.tail;
-      this.size=pre.size;
+
+      this.head = prev.head;
+      this.tail = prev.tail;
+      this.size = prev.size;
+    }
+
+    private void displayReverseHelper(Node node){
+      if(node == null){
+        return;
+      }
+      displayReverseHelper(node.next);
+      System.out.print(node.data + " ");
+    }
+
+    public void displayReverse(){
+      displayReverseHelper(head);
+      System.out.println();
+    }
+ 
+    private void reversePRHelper(Node node){
+      // write your code here
+      if(node==null){
+          return;
+      }
+      reversePRHelper(node.next);
+      if(node==tail){
+          // nothing do here
+      }
+      else{
+          node.next.next=node;
+      }
+    }
+
+    public void reversePR(){
+      // write your code here
+      reversePRHelper(head);
+      head.next=null;
+      // yaha se head , tail set
+      
+      Node temp=head;
+      head=tail;
+      tail=temp;
     }
   }
 
@@ -378,20 +414,13 @@ public class Main {
       l1.addLast(d);
     }
 
-    int k = Integer.parseInt(br.readLine());
     int a = Integer.parseInt(br.readLine());
     int b = Integer.parseInt(br.readLine());
 
     l1.display();
-    l1.kReverse(k);
-    l1.display();
-    l1.addFirst(a);
-    l1.addLast(b);
+    l1.reversePR();
+    l1.addLast(a);
+    l1.addFirst(b);
     l1.display();
   }
 }
-
-------------------------------------------------------
-
-input-> 1-2-3-4-5-6-7-8-9-10-11
-output->3-2-1-6-5-4-9-8-7-10-11
