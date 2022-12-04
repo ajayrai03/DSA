@@ -1,8 +1,3 @@
-=> 60 20 30 40 50 
-   50 40 30 20 60 
-
-
-
 import java.io.*;
 import java.util.*;
 
@@ -143,42 +138,22 @@ public class Main {
     }
 
     public void removeAt(int idx) {
-      if (idx < 0 || idx >= size) {
-        System.out.println("Invalid arguments");
-      } else if (idx == 0) {
-        removeFirst();
-      } else if (idx == size - 1) {
-        removeLast();
-      } else {
-        Node temp = head;
-        for (int i = 0; i < idx - 1; i++) {
-          temp = temp.next;
-        }
-
-        temp.next = temp.next.next;
-        size--;
+      if(idx<0||idx>=size){
+          System.out.println("Invalid arguments");
       }
-    }
-    public Node getNodeAt(int idx){
-        Node temp=head;
-        for(int i=0;i<idx;i++){
-            temp=temp.next;
-        }
-        return temp;
-    }
-
-    public void reverseDI() {
-      
-      int li=0;
-      int ri=size-1;
-      while(li<ri){
-          Node left=getNodeAt(li);
-          Node right=getNodeAt(ri);
-          int temp=left.data;
-          left.data=right.data;
-          right.data=temp;
-          li++;
-          ri--;
+      else if(idx==0){
+          removeFirst();
+      }
+      else if(idx==size-1){
+          removeLast();
+      }
+      else{
+          Node temp=head;
+          for(int i=0;i<idx-1;i++){
+              temp=temp.next;
+          }
+          temp.next=temp.next.next;
+          size--;
       }
     }
   }
@@ -226,8 +201,6 @@ public class Main {
       } else if (str.startsWith("removeAt")) {
         int idx = Integer.parseInt(str.split(" ")[1]);
         list.removeAt(idx);
-      } else if(str.startsWith("reverseDI")){
-        list.reverseDI();
       }
       str = br.readLine();
     }
