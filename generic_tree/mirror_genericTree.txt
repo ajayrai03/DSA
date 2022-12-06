@@ -91,17 +91,56 @@ public class Main {
     System.out.println("Node Post " + node.data);
   }
 
-  public static void levelOrder(Node node){
-   Queue<Node> que=new ArrayDeque<>();
-   que.add(node);
-   while(que.size()>0){
-       Node nn=que.remove();
-       System.out.print(nn.data+" ");
-       for(Node child:nn.children){
-           que.add(child);
-       }
-   }
-   System.out.println(".");
+  public static void levelOrderLinewiseZZ(Node node){
+    Stack<Node> stack = new Stack<>();
+    stack.add(node);
+
+    Stack<Node> cstack = new Stack<>();
+    int level = 0;
+
+    while(stack.size() > 0){
+      node = stack.pop();
+      System.out.print(node.data + " ");
+
+      if(level % 2 == 0){
+        for(int i = 0; i < node.children.size(); i++){
+          Node child = node.children.get(i);
+          cstack.push(child);
+        }
+      } else {
+        for(int i = node.children.size() - 1; i >= 0; i--){
+          Node child = node.children.get(i);
+          cstack.push(child);
+        }
+      }
+
+      if(stack.size() == 0){
+        stack = cstack;
+        cstack = new Stack<>();
+        level++;
+        System.out.println();
+      }
+    }
+  }
+
+  public static void mirror(Node node){
+    
+    // faith- child reverse
+    for(Node child:node.children){
+        mirror(child);
+    }
+    // my work- arrayList reverse in root, ln-left node, rn-right node
+    
+    int left=0;
+    int right=node.children.size()-1;
+    while(left<right){
+        Node ln=node.children.get(left);
+        Node rn=node.children.get(right);
+        node.children.set(left,rn);
+        node.children.set(right,ln);
+        left++;
+        right--;
+    }
   }
 
   public static void main(String[] args) throws Exception {
@@ -114,7 +153,9 @@ public class Main {
     }
 
     Node root = construct(arr);
-    levelOrder(root);
+    display(root);
+    mirror(root);
+    display(root);
   }
 
 }
